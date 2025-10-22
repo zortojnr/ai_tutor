@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from utils.openai_helper import get_math_response
+from utils.gemini_helper import get_math_response
 from dotenv import load_dotenv
 from datetime import datetime
 
