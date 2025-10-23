@@ -196,7 +196,7 @@
             {% endif %}
         <div class="chat-box" id="chatBox">
             {% for message in response %}
-            <div class="{{ 'bubble-user text-end' if message.role == 'user' else 'bubble-ai' }}">
+            <div class="{{ 'bubble-user text-end' if message.type == 'user' else 'bubble-ai' }}">
                 {% if message.type == 'user' %}
                 <strong>You:</strong> {{ message.message }}
                 {% else %}

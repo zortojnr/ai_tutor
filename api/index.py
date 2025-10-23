@@ -45,13 +45,19 @@ class handler(BaseHTTPRequestHandler):
             question = parsed_data.get('question', [''])[0]
             
             try:
+                print(f"Processing question: {question}")
                 result = get_math_response(question)
-                if result:
+                print(f"AI Response: {result[:100]}...")
+                
+                if result and result.strip():
                     user_query = {"type": "user", "message": question, "timestamp": datetime.utcnow()}
                     agent_query = {"type": "agent", "message": result, "timestamp": datetime.utcnow()}
                     response = [user_query, agent_query]
                 else:
-                    response = []
+                    print("Empty result from AI")
+                    user_query = {"type": "user", "message": question, "timestamp": datetime.utcnow()}
+                    error_response = {"type": "agent", "message": "Sorry, I couldn't generate a response. Please try again.", "timestamp": datetime.utcnow()}
+                    response = [user_query, error_response]
             except Exception as e:
                 print(f"Error in ask_math: {str(e)}")
                 user_query = {"type": "user", "message": question, "timestamp": datetime.utcnow()}
